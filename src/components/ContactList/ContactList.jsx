@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { delContact } from "redux/slices";
+import { deleteContact } from "redux/operations";
 import PropTypes from 'prop-types';
 import css from './ContactList.module.css';
 
@@ -9,14 +9,14 @@ export default function ContactList({ contacts }) {
 
   return (
     <ul className={ css.list }>
-      {contacts.map(({ id, name, number }) => (
+      {contacts.map(({ id, name, phone }) => (
         <li
           className={ css.item }
           key={ id }>
-          <span>{ name }: { number }</span>
+          <span>{ name }: { phone }</span>
           <button
             type="button"
-            onClick={ () => dispatch(delContact(id)) }
+            onClick={ () => dispatch(deleteContact(id)) }
           >delete</button>
         </li>
       ))}
@@ -28,6 +28,6 @@ ContactList.propTypes = {
   contacts: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
   })),
 }
